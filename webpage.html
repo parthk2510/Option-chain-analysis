@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Option Chain Clone</title>
+    <style>
+      /* CSS styles for the table */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      /* CSS styles for the dropdown menu */
+      .custom-select {
+        position: relative;
+        display: inline-block;
+      }
+
+      .custom-select select {
+        display: none; /* Hide the original dropdown */
+      }
+
+      .select-selected {
+        background-color: #f2f2f2;
+        padding: 8px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      .select-selected:after {
+        content: "\25BC";
+        position: absolute;
+        top: 14px;
+        right: 10px;
+        pointer-events: none;
+      }
+
+      .select-items div {
+        padding: 8px;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .select-items {
+        position: absolute;
+        background-color: #f9f9f9;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+      }
+
+      .select-hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Option Chain Clone</h1>
+
+    <div id="optionContract" class="custom_select">
+      <select
+        name=""
+        id="equity_optionchain_select"
+        aria-labelledby="equityOptionchainLbl"
+      >
+        <option value="" id="select">Select</option>
+        <option
+          value="NIFTY"
+          selected=""
+          data-nse-translate="symbol"
+          data-nse-translate-symbol="NIFTY"
+        >
+          NIFTY
+        </option>
+        <option
+          value="FINNIFTY"
+          data-nse-translate="symbol"
+          data-nse-translate-symbol="FINNIFTY"
+        >
+          FINNIFTY
+        </option>
+        <option
+          value="BANKNIFTY"
+          data-nse-translate="symbol"
+          data-nse-translate-symbol="BANKNIFTY"
+        >
+          BANKNIFTY
+        </option>
+        <option
+          value="MIDCPNIFTY"
+          data-nse-translate="symbol"
+          data-nse-translate-symbol="MIDCPNIFTY"
+        >
+          MIDCPNIFTY
+        </option>
+      </select>
+    </div>
+
+    <table id="optionChainTable">
+      <thead>
+        <tr>
+          <th>Column 1</th>
+          <th>Column 2</th>
+          <th>Column 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+        </tr>
+        <tr>
+          <td>Data 4</td>
+          <td>Data 5</td>
+          <td>Data 6</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      // JavaScript code to handle the dropdown menu
+      var select = document.getElementById("equity_optionchain_select");
+      select.addEventListener("change", function () {
+        var selectedValue = this.value;
+        // Perform actions based on the selected value
+        console.log("Selected value: " + selectedValue);
+      });
+    </script>
+  </body>
+</html>
