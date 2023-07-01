@@ -63,10 +63,106 @@
       .select-hide {
         display: none;
       }
+      nav.secondary-nav {
+        background-color: #f2f2f2;
+        text-align: left;
+        margin-left: 20px;
+      }
+
+      nav.secondary-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav.secondary-nav ul li {
+        display: inline-block;
+      }
+
+      nav.secondary-nav ul li a {
+        display: block;
+        padding: 10px 20px;
+        color: #000000;
+        text-decoration: none;
+      }
+
+      nav.secondary-nav ul li a:hover {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .dropdown-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
+      .dropdown {
+        text-align: center;
+      }
+
+      .dropdown h2 {
+        font-size: 16px;
+        margin-top: 0;
+      }
+
+      .dropdown select {
+        width: 200px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
     </style>
   </head>
   <body>
     <h1>Option Chain Clone</h1>
+    <nav class="secondary-nav">
+      <ul>
+        <li><a href="#">Equity Stock</a></li>
+        <li><a href="#">Currency</a></li>
+        <li><a href="#">Interest Rate</a></li>
+        <li><a href="#">Commodity</a></li>
+      </ul>
+    </nav>
+    <div class="dropdown-container">
+      <div class="dropdown">
+        <h2>View Options Contracts for:</h2>
+        <select>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <h2>Currency</h2>
+        <select>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <h2>Interest Rate</h2>
+        <select>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+      <div class="dropdown">
+        <h2>Commodity</h2>
+        <select>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+    </div>
 
     <div id="optionContract" class="custom_select">
       <select
