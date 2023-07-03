@@ -1,18 +1,20 @@
-header {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f0f0f0;
-    padding: 10px;
+    background-color: yellow;
+    padding: 5px;
   }
-  
+
   .logo img {
-    height: 40px; /* Adjust the height as needed */
+    height: 75px;
+    width: 100px;
   }
   
   .title {
-    flex-grow: 1;
-    text-align: center;
+    margin-left: 10%;
+    font-size: 20px;
+    font-style: italic;
   }
   
   nav ul {
@@ -23,11 +25,72 @@ header {
   }
   
   nav ul li {
-    margin-left: 10px; /* Adjust the spacing between links */
+    margin-left: 20px; /* Adjust the spacing between links */
   }
   
   nav ul li a {
-    text-decoration: none;
-    color: #333;
+    text-decoration: solid;
+    color: #000000;
   }
   
+  nav.secondary-nav {
+    background-color: #f2f2f2;
+    text-align: left;
+    margin-left: 10px;
+}
+
+nav.secondary-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav.secondary-nav ul li {
+    display: inline-block;
+}
+
+nav.secondary-nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+}
+
+nav.secondary-nav ul li a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.dropdown {
+    text-align: center;
+}
+
+.dropdown h2 {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.dropdown select {
+    width: 200px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.text-between1,.text-between2{
+  font-size: 20px;
+  color: #333;
+}
+.text-between1{margin: -50px 280px;}
+.text-between2{margin: 25px 975px;}
