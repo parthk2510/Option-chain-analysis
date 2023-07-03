@@ -7,14 +7,14 @@ nav {
   }
 
   .logo img {
-    height: 75px;
-    width: 100px;
+    height: 100px;
+    width: 105px;
   }
   
   .title {
     margin-left: 10%;
-    font-size: 20px;
-    font-style: italic;
+    font-size: 25px;
+    font-weight: bolder;
   }
   
   nav ul {
