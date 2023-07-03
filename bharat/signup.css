@@ -2,8 +2,78 @@
 *{
     font-family: 'poppins' ,sans-serif;
 }
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: yellow;
+    padding: 5px;
+  }
+
+  .logo img {
+    height: 75px;
+    width: 75x;
+  }
+  
+  .title {
+    margin-left: 10%;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    /* margin-left: 30px;  */
+  }
+  
+  nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+}
+
+  nav ul li a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+  
+  nav.secondary-nav {
+    background-color: #f2f2f2;
+    text-align: left;
+    margin-left: 10px;
+}
+
+nav.secondary-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav.secondary-nav ul li {
+    display: inline-block;
+}
+
+nav.secondary-nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+}
+
+nav.secondary-nav ul li a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
 body{
-    background-image: url("images/1.jpg");
+    background-image: url("/bharat/images/4.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
