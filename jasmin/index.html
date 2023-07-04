@@ -16,8 +16,8 @@
       .container {
         display: flex;
         justify-content: center;
-        max-width: 1000px;
-        margin-left: 0px;
+        max-width: fit-content;
+        scale: 70%;
 
       }
 
@@ -67,7 +67,7 @@
           <li><a href="#">Commodity</a></li>
       </ul>
   </nav>
-  
+    <h1></h1>
     <form>
       <div class="dropdown-container">
       <div class="dropdown">
@@ -83,6 +83,7 @@
         <thead>
           <tr>
             <th>Strike Price</th>
+            <th>Underlying Price</th>
             <th>Last Traded Price</th>
             <th>OI</th>
             <th>Change in OI</th>
@@ -101,6 +102,7 @@
         <thead>
           <tr>
             <th>Strike Price</th>
+            <th>Underlying Price</th>
             <th>Last Traded Price</th>
             <th>OI</th>
             <th>Change in OI</th>
@@ -187,6 +189,7 @@
             mergedItem.puts.forEach(function (putItem) {
               var callsRow = `<tr>
                 <td>${callItem.strikePrice}</td>
+                <td>${putItem.underlying_price}</td>
                 <td>${callItem.LTP}</td>
                 <td>${callItem.openInterest}</td>
                 <td>${callItem.changeInOi}</td>
@@ -201,6 +204,7 @@
 
               var putsRow = `<tr>
                 <td>${putItem.strikePrice}</td>
+                <td>${putItem.underlying_price}</td>
                 <td>${putItem.LTP}</td>
                 <td>${putItem.openInterest}</td>
                 <td>${putItem.changeInOi}</td>
@@ -263,8 +267,10 @@
         fetchData(); // Fetch data for the selected symbol and expiry date
       });
 
-      // Initial data retrieval
+      $(document).ready(function() {
       fetchSymbols();
+      setInterval(fetchData, 5000);
+    });
     </script>
   </body>
 </html>
