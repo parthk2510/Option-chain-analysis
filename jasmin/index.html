@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      form {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Option Chain</h1>
+    <form>
+      <select id="symbol-select" name="symbol"></select> <!-- Dynamic dropdown -->
+    </form>
+    <table id="data-table"></table>
+
+    <script>
+      function getData() {
+        $.ajax({
+          url: "http://127.0.0.1:5000/symbols", // Fetch unique symbols
+          method: "GET",
+          success: function(response) {
+            populateDropdown(response); // Populate the dropdown with symbols
+          },
+          error: function(xhr, status, error) {
+            console.log(error);
+          }
+        });
+      }
+
+      function populateDropdown(symbols) {
+        var symbolSelect = $("#symbol-select");
+        symbolSelect.empty();
+
+        // Add an option for each symbol
+        symbols.forEach(function(symbol) {
+          var option = $("<option></option>")
+            .attr("value", symbol)
+            .text(symbol);
+          symbolSelect.append(option);
+        });
+
+        // Trigger the change event to fetch data for the initial selected symbol
+        symbolSelect.trigger("change");
+      }
+
+      function updateDataList(data) {
+        var dataTable = $("#data-table");
+        dataTable.empty();
+
+        var tableHeader = `
+          <tr>
+            <th>Expiry Date</th>
+            <th>Option Type</th>
+            <th>Strike Price</th>
+            <th>Last Traded Price</th>
+            <th>OI</th>
+            <th>Change in OI</th>
+            <th>Volume</th>
+            <th>IV</th>
+            <th>Bid Qty</th>
+            <th>Bid</th>
+            <th>Ask</th>
+            <th>Ask Qty</th>
+            <th>Net Change</th>
+          </tr>`;
+
+        dataTable.append(tableHeader);
+
+        data.forEach(function (item) {
+          var row = `
+            <tr>
+              <td>${item.date}</td>
+              <td>${item.option}</td>
+              <td>${item.strikePrice}</td>
+              <td>${item.LTP}</td>
+              <td>${item.openInterest}</td>
+              <td>${item.changeInOi}</td>
+              <td>${item.totalTradedVolume}</td>
+              <td>${item.iv}</td>
+              <td>${item.bestBidQty}</td>
+              <td>${item.bestBid}</td>
+              <td>${item.bestAsk}</td>
+              <td>${item.bestAskQty}</td>
+              <td>${item.change}</td>
+            </tr>`;
+
+          dataTable.append(row);
+        });
+      }
+
+      // Event listener for dropdown menu change
+      $("#symbol-select").change(function () {
+        var symbol = $(this).val();
+        $.ajax({
+          url: "http://127.0.0.1:5000/data", // URL to fetch data based on symbol
+          method: "GET",
+          data: { symbol: symbol },
+          success: function (response) {
+            console.log(response);
+            updateDataList(response);
+          },
+          error: function (xhr, status, error) {
+            console.log(error);
+          },
+        });
+      });
+
+      // Poll for updates every 5 seconds
+      setInterval(getData, 5000);
+
+      // Initial data retrieval
+      getData();
+    </script>
+  </body>
+</html>
