@@ -38,44 +38,54 @@
   <body>
     <h1>Option Chain</h1>
     <form>
-      <select id="symbol-select" name="symbol"></select> <!-- Dynamic dropdown -->
+      <select id="symbol-select" name="symbol"></select> <!-- Dynamic dropdown for symbols -->
+      <select id="expiry-select" name="expiry"></select> <!-- Dynamic dropdown for expiry dates -->
     </form>
     <table id="data-table"></table>
 
     <script>
+      var selectedSymbol = ""; // Variable to store the selected symbol
+    
       function getData() {
         $.ajax({
           url: "http://127.0.0.1:5000/symbols", // Fetch unique symbols
           method: "GET",
-          success: function(response) {
+          success: function (response) {
             populateDropdown(response); // Populate the dropdown with symbols
           },
-          error: function(xhr, status, error) {
+          error: function (xhr, status, error) {
             console.log(error);
-          }
+          },
         });
       }
-
+    
       function populateDropdown(symbols) {
         var symbolSelect = $("#symbol-select");
+        var selected = symbolSelect.val(); // Get the currently selected symbol
+    
         symbolSelect.empty();
-
+    
         // Add an option for each symbol
-        symbols.forEach(function(symbol) {
+        symbols.forEach(function (symbol) {
           var option = $("<option></option>")
             .attr("value", symbol)
             .text(symbol);
+    
+          if (symbol === selected) {
+            option.attr("selected", "selected"); // Set the selected option
+          }
+    
           symbolSelect.append(option);
         });
-
-        // Trigger the change event to fetch data for the initial selected symbol
-        symbolSelect.trigger("change");
+    
+        // Update the selected symbol variable
+        selectedSymbol = selected;
       }
-
+    
       function updateDataList(data) {
         var dataTable = $("#data-table");
         dataTable.empty();
-
+    
         var tableHeader = `
           <tr>
             <th>Expiry Date</th>
@@ -92,13 +102,13 @@
             <th>Ask Qty</th>
             <th>Net Change</th>
           </tr>`;
-
+    
         dataTable.append(tableHeader);
-
+    
         data.forEach(function (item) {
           var row = `
             <tr>
-              <td>${item.date}</td>
+              <td>${item.expiry_date}</td>
               <td>${item.option}</td>
               <td>${item.strikePrice}</td>
               <td>${item.LTP}</td>
@@ -112,14 +122,16 @@
               <td>${item.bestAskQty}</td>
               <td>${item.change}</td>
             </tr>`;
-
+    
           dataTable.append(row);
         });
       }
-
+    
       // Event listener for dropdown menu change
       $("#symbol-select").change(function () {
         var symbol = $(this).val();
+        selectedSymbol = symbol; // Update the selected symbol variable
+    
         $.ajax({
           url: "http://127.0.0.1:5000/data", // URL to fetch data based on symbol
           method: "GET",
@@ -133,12 +145,18 @@
           },
         });
       });
-
+    
       // Poll for updates every 5 seconds
-      setInterval(getData, 5000);
-
+      setInterval(function () {
+        // Set the selected value of the dropdown to retain the selection
+        $("#symbol-select").val(selectedSymbol);
+    
+        getData();
+      }, 5000);
+    
       // Initial data retrieval
       getData();
     </script>
+    
   </body>
 </html>
